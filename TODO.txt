@@ -1,0 +1,4 @@
+Possible fun extra tasks:
+
+extend the lexer to allow floats, hex, octal, binary etc numbers as literals.
+extend the lexer to allow identifiers which are not exclusively ascii letters / numbers
