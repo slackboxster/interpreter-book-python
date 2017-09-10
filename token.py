@@ -4,7 +4,7 @@ class Token:
     EOF = "EOF"
 
     # Identifiers + literals
-    IDENT = "IDENT"  # add, foobar, x, y, ...
+    IDENTIFIER = "IDENTIFIER"  # add, foobar, x, y, ...
     INT = "INT"  # 1343456
 
     # Operators
@@ -23,7 +23,17 @@ class Token:
     FUNCTION = "FUNCTION"
     LET = "LET"
 
+    keywords = {
+        "fn": FUNCTION,
+        "let": LET
+    }
+
     def __init__(self, type, literal):
         self.type = type
         self.literal = literal
 
+    @classmethod
+    def find_identifier_token_type(cls, identifier):
+        if identifier in cls.keywords:
+            return cls.keywords[identifier]
+        return cls.IDENTIFIER
