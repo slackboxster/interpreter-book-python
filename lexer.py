@@ -71,6 +71,11 @@ class Lexer:
         while self.is_whitespace(self.char):
             self.read_char()
 
+    #TODO: replace the is_letter / is_whitespace / is_digit method invocations in the above methods with an
+        #"is_valid_char" item... I guess the reason he skips it here is that it affects the parser later on...
+            # but anyway, if we also keep a scope... as in, when reading an identifier, we check if it
+            # has the correct characters for an identifier, and so forth.
+
     @staticmethod
     def is_letter(byte):
         return str(byte) in (string.ascii_letters + '_')
