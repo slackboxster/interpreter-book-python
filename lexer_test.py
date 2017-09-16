@@ -13,27 +13,6 @@ class ExpectedToken:
 
 class TestLexer(unittest.TestCase):
 
-    def test_next_token(self):
-        input = '=+(){},;'
-        tests = [
-            ExpectedToken(Token.ASSIGN, "="),
-            ExpectedToken(Token.PLUS, "+"),
-            ExpectedToken(Token.LPAREN, "("),
-            ExpectedToken(Token.RPAREN, ")"),
-            ExpectedToken(Token.LBRACE, "{"),
-            ExpectedToken(Token.RBRACE, "}"),
-            ExpectedToken(Token.COMMA, ","),
-            ExpectedToken(Token.SEMICOLON, ";"),
-            ExpectedToken(Token.EOF, "")
-        ]
-
-        lexer = Lexer(input)
-
-        for test in tests:
-            token = lexer.next_token()
-            self.assertEqual(token.type, test.expected_type)
-            self.assertEqual(token.literal, test.expected_literal)
-
     def test_next_token_more(self):
         input = '''
             let five = 5;
@@ -42,6 +21,8 @@ class TestLexer(unittest.TestCase):
                 x + y;
             };
             let result = add(five, ten);
+            !-/*5
+            5 < 10 > 5
         '''
 
         tests = [
@@ -81,6 +62,16 @@ class TestLexer(unittest.TestCase):
             ExpectedToken(Token.IDENTIFIER, "ten"),
             ExpectedToken(Token.RPAREN, ")"),
             ExpectedToken(Token.SEMICOLON, ";"),
+            ExpectedToken(Token.BANG, "!"),
+            ExpectedToken(Token.MINUS, "-"),
+            ExpectedToken(Token.SLASH, "/"),
+            ExpectedToken(Token.ASTERISK, "*"),
+            ExpectedToken(Token.INT, "5"),
+            ExpectedToken(Token.INT, "5"),
+            ExpectedToken(Token.LT, "<"),
+            ExpectedToken(Token.INT, "10"),
+            ExpectedToken(Token.GT, ">"),
+            ExpectedToken(Token.INT, "5"),
             ExpectedToken(Token.EOF, "")
         ]
 

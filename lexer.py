@@ -16,14 +16,24 @@ class Lexer:
         self.skip_whitespace()
 
         tokens = {
+            # Operators
             Token.ASSIGN: Token(Token.ASSIGN, self.char),
+            Token.PLUS: Token(Token.PLUS, self.char),
+            Token.MINUS: Token(Token.MINUS, self.char),
+            Token.BANG: Token(Token.BANG, self.char),
+            Token.ASTERISK: Token(Token.ASTERISK, self.char),
+            Token.SLASH: Token(Token.SLASH, self.char),
+            Token.LT: Token(Token.LT, self.char),
+            Token.GT: Token(Token.GT, self.char),
+
+            # Delimiters
+            Token.COMMA: Token(Token.COMMA, self.char),
             Token.SEMICOLON: Token(Token.SEMICOLON, self.char),
             Token.LPAREN: Token(Token.LPAREN, self.char),
             Token.RPAREN: Token(Token.RPAREN, self.char),
-            Token.COMMA: Token(Token.COMMA, self.char),
-            Token.PLUS: Token(Token.PLUS, self.char),
             Token.LBRACE: Token(Token.LBRACE, self.char),
             Token.RBRACE: Token(Token.RBRACE, self.char),
+
             0: Token(Token.EOF, "")
         }
 
