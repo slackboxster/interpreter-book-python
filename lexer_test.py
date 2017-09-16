@@ -23,6 +23,12 @@ class TestLexer(unittest.TestCase):
             let result = add(five, ten);
             !-/*5
             5 < 10 > 5
+            
+            if (5 < 10) {
+                return true;
+            } else {
+                return false;
+            }
         '''
 
         tests = [
@@ -72,6 +78,23 @@ class TestLexer(unittest.TestCase):
             ExpectedToken(Token.INT, "10"),
             ExpectedToken(Token.GT, ">"),
             ExpectedToken(Token.INT, "5"),
+            ExpectedToken(Token.IF, "if"),
+            ExpectedToken(Token.LPAREN, "("),
+            ExpectedToken(Token.INT, "5"),
+            ExpectedToken(Token.LT, "<"),
+            ExpectedToken(Token.INT, "10"),
+            ExpectedToken(Token.RPAREN, ")"),
+            ExpectedToken(Token.LBRACE, "{"),
+            ExpectedToken(Token.RETURN, "return"),
+            ExpectedToken(Token.TRUE, "true"),
+            ExpectedToken(Token.SEMICOLON, ";"),
+            ExpectedToken(Token.RBRACE, "}"),
+            ExpectedToken(Token.ELSE, "else"),
+            ExpectedToken(Token.LBRACE, "{"),
+            ExpectedToken(Token.RETURN, "return"),
+            ExpectedToken(Token.FALSE, "false"),
+            ExpectedToken(Token.SEMICOLON, ";"),
+            ExpectedToken(Token.RBRACE, "}"),
             ExpectedToken(Token.EOF, "")
         ]
 
