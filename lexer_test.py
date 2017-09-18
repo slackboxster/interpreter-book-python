@@ -29,6 +29,9 @@ class TestLexer(unittest.TestCase):
             } else {
                 return false;
             }
+            
+            10 == 10;
+            10 != 9;
         '''
 
         tests = [
@@ -95,6 +98,14 @@ class TestLexer(unittest.TestCase):
             ExpectedToken(Token.FALSE, "false"),
             ExpectedToken(Token.SEMICOLON, ";"),
             ExpectedToken(Token.RBRACE, "}"),
+            ExpectedToken(Token.INT, "10"),
+            ExpectedToken(Token.EQ, "=="),
+            ExpectedToken(Token.INT, "10"),
+            ExpectedToken(Token.SEMICOLON, ";"),
+            ExpectedToken(Token.INT, "10"),
+            ExpectedToken(Token.NOT_EQ, "!="),
+            ExpectedToken(Token.INT, "9"),
+            ExpectedToken(Token.SEMICOLON, ";"),
             ExpectedToken(Token.EOF, "")
         ]
 

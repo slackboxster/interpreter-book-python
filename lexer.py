@@ -17,10 +17,8 @@ class Lexer:
 
         tokens = {
             # Operators
-            Token.ASSIGN: Token(Token.ASSIGN, self.char),
             Token.PLUS: Token(Token.PLUS, self.char),
             Token.MINUS: Token(Token.MINUS, self.char),
-            Token.BANG: Token(Token.BANG, self.char),
             Token.ASTERISK: Token(Token.ASTERISK, self.char),
             Token.SLASH: Token(Token.SLASH, self.char),
             Token.LT: Token(Token.LT, self.char),
@@ -40,7 +38,17 @@ class Lexer:
         if self.char in tokens:
             token = tokens[self.char]
         else:
-            if self.is_letter(self.char):
+            if self.char == Token.ASSIGN:
+                if self.peek_char() == Token.ASSIGN:
+                    token = Token(Token.EQ, self.char + self.read_char())
+                else:
+                    token = Token(Token.ASSIGN, self.char)
+            elif self.char == Token.BANG:
+                if self.peek_char() == Token.ASSIGN:
+                    token = Token(Token.NOT_EQ, self.char + self.read_char())
+                else:
+                    token = Token(Token.BANG, self.char)
+            elif self.is_letter(self.char):
                 identifier = self.read_identifier()
                 return Token(Token.find_identifier_token_type(identifier), identifier)
             elif self.is_digit(self.char):
@@ -60,6 +68,14 @@ class Lexer:
 
         self.position = self.read_position
         self.read_position += 1
+
+        return self.char
+
+    def peek_char(self):
+        if self.read_position >= len(self.input):
+            return 0
+
+        return self.input[self.read_position]
 
     def read_identifier(self):
         position = self.position
