@@ -32,7 +32,7 @@ class Lexer:
             Token.LBRACE: Token(Token.LBRACE, self.char),
             Token.RBRACE: Token(Token.RBRACE, self.char),
 
-            0: Token(Token.EOF, "")
+            None: Token(Token.EOF, "")
         }
 
         if self.char in tokens:
@@ -62,7 +62,7 @@ class Lexer:
 
     def read_char(self):
         if self.read_position >= len(self.input):
-            self.char = 0
+            self.char = None
         else:
             self.char = self.input[self.read_position]
 
@@ -73,7 +73,7 @@ class Lexer:
 
     def peek_char(self):
         if self.read_position >= len(self.input):
-            return 0
+            return None
 
         return self.input[self.read_position]
 
@@ -113,10 +113,11 @@ class Lexer:
 if __name__ == '__main__':
     import sys
 
-    with open(sys.argv[1], 'r') as source_file:
-        code = source_file.read()
-        lexer = Lexer(code)
+    source_file = open(sys.argv[1], 'r') if len(sys.argv) >= 2 else sys.stdin
+    code = source_file.read()
+    lexer = Lexer(code)
+    token = lexer.next_token()
+    while token.type != Token.EOF:
+        print token.type + ": '" + token.literal + "'"
         token = lexer.next_token()
-        while token.type != Token.EOF:
-            print token.type + ": '" + token.literal + "'"
-            token = lexer.next_token()
+
