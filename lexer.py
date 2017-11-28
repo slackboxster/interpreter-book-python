@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from token import Token
+from tokens import Token
 import string
 
 class Lexer:

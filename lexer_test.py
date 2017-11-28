@@ -1,7 +1,5 @@
-#!/usr/bin/env python
 
-import unittest
-from token import Token
+from tokens import Token
 from lexer import Lexer
 
 
@@ -11,7 +9,7 @@ class ExpectedToken:
         self.expected_literal = expected_literal
 
 
-class TestLexer(unittest.TestCase):
+class TestLexer:
 
     def test_next_token_more(self):
         input = '''
@@ -113,35 +111,30 @@ class TestLexer(unittest.TestCase):
 
         for test in tests:
             token = lexer.next_token()
-            self.assertEqual(token.type, test.expected_type)
-            self.assertEqual(token.literal, test.expected_literal)
+            assert token.type == test.expected_type
+            assert token.literal == test.expected_literal
 
     def test_is_letter(self):
-        self.assertTrue(Lexer.is_letter('a'))
-        self.assertTrue(Lexer.is_letter('Z'))
-        self.assertTrue(Lexer.is_letter('_'))
-        self.assertFalse(Lexer.is_letter('4'))
-        self.assertFalse(Lexer.is_letter('$'))
+        assert Lexer.is_letter('a')
+        assert Lexer.is_letter('Z')
+        assert Lexer.is_letter('_')
+        assert not Lexer.is_letter('4')
+        assert not Lexer.is_letter('$')
 
     def test_is_whitespace(self):
-        self.assertTrue(Lexer.is_whitespace(' '))
-        self.assertTrue(Lexer.is_whitespace('\t'))
-        self.assertTrue(Lexer.is_whitespace('\n'))
-        self.assertTrue(Lexer.is_whitespace('\r'))
-        self.assertFalse(Lexer.is_whitespace('4'))
-        self.assertFalse(Lexer.is_whitespace('f'))
-        self.assertFalse(Lexer.is_whitespace('$'))
-        self.assertFalse(Lexer.is_whitespace('Z'))
+        assert Lexer.is_whitespace(' ')
+        assert Lexer.is_whitespace('\t')
+        assert Lexer.is_whitespace('\n')
+        assert Lexer.is_whitespace('\r')
+        assert not Lexer.is_whitespace('4')
+        assert not Lexer.is_whitespace('f')
+        assert not Lexer.is_whitespace('$')
+        assert not Lexer.is_whitespace('Z')
 
     def test_is_digit(self):
-        self.assertTrue(Lexer.is_digit('9'))
-        self.assertFalse(Lexer.is_digit(' '))
-        self.assertFalse(Lexer.is_digit('f'))
-        self.assertFalse(Lexer.is_digit('U'))
-        self.assertFalse(Lexer.is_digit('$'))
-        self.assertFalse(Lexer.is_digit('_'))
-
-if __name__ == '__main__':
-    unittest.main()
-
-
+        assert Lexer.is_digit('9')
+        assert not Lexer.is_digit(' ')
+        assert not Lexer.is_digit('f')
+        assert not Lexer.is_digit('U')
+        assert not Lexer.is_digit('$')
+        assert not Lexer.is_digit('_')
