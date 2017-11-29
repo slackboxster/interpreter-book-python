@@ -1,5 +1,5 @@
-run: *.py
-	./monkey.py
+run: $(wildcard monkey/*.py)
+	monkey/repl.py
 
-test: *.py *_test.py
+test: $(wildcard monkey/*.py) $(wildcard test/*.py)
 	export PYTHONPATH=".:$$PYTHONHOME:$$PYTHONPATH"; pytest

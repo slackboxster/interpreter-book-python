@@ -1,6 +1,8 @@
+import sys
+sys.path.insert(0, '../monkey')
 
-from tokens import Token
-from lexer import Lexer
+from monkey.token import Token
+from monkey.lexer import Lexer
 
 
 class ExpectedToken:

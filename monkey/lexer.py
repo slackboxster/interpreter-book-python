@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
-from tokens import Token
+from token import Token
 import string
 
+
 class Lexer:
+
     def __init__(self, input):
         self.input = input
         self.position = 0
